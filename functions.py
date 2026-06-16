@@ -16,7 +16,6 @@ def getFuncionario(nome):
         return "Seu funcionário não existe"
 
 
-
 def registraFuncionario(nome, cargo):
     # Validar se existe nome
     if validaFuncionario(nome):
@@ -25,6 +24,10 @@ def registraFuncionario(nome, cargo):
     funcionarios.append(
         {"nome":nome,
          "cargo":cargo})
+
+def editarFuncionario(funciona, nome, cargo):
+    getFuncionario()
+
     
 def registraPonto(nome, data, entrada, saida):
     if not validaFuncionario(nome):
