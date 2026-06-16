@@ -1,5 +1,7 @@
 # Arquivo principal que chamara o projeto
 import os
+from functions import *
+carregar()
 
 while True:
     print("Bem vindo(a) ao sistema de Ponto IFCE")
@@ -35,3 +37,5 @@ while True:
     except ValueError:
         print("Valor digitado é inválido")
         input()
+        
+salvar()
