@@ -1,18 +1,18 @@
 # Arquivo de funções do projeto
 import shelve
 from datetime import datetime
-import os
+from functionsMenu import lerOpcao
 
 funcionarios = []
 
 # Funções Shelve
 def salvar():
-    with shelve.open("dados") as fun:
+    with shelve.open("dados/funcionarios") as fun:
         fun["funcionarios"] = funcionarios
 
 def carregar():
     global funcionarios 
-    with shelve.open("dados") as fun:
+    with shelve.open("dados/funcionarios") as fun:
         return fun.get("funcionarios", [])
 
 
@@ -44,7 +44,6 @@ def registraFuncionario(nome, cargo):
         return "Funcionário Criado Com Sucesso !!!"
 
 def editarFuncionario(nomeAtual, nomeNew, cargoNew):
-
     if not validaFuncionario(nomeAtual):
         return "Seu funcionário não existe..."
     
@@ -58,13 +57,25 @@ def deletaFuncionario(nomeAtual):
         return "Seu funcionário não existe..."
     
     funcionario = getFuncionario(nomeAtual)
-    funcionarios.remove(funcionario)
-    return "Funcionário deletado !!"
 
+    if input(f"Deseja realmente deletar o {funcionario['nome']} (S/N)?") == "S":   
+        funcionarios.remove(funcionario)
+        return "Funcionário deletado !!"
+    
+    return f"Falha ao deletar {funcionario['nome']}..."
+
+def getAllFuncionarios():
+    if len(funcionarios) < 1:
+        return "Não existe funcionários ainda..."
+    for func in funcionarios:
+        print(f"Nome: {func['nome']}, Cargo: {func['cargo']}")
 
 def registraPonto(nome, data, entrada, saida):
     if not validaFuncionario(nome):
         return "Seu funcionário não existe"
+    
+    datetime.strptime(entrada) 
+    datetime.strptime(saida)
 
     if entrada > saida:
         return "O horário da entrada não pode ser maior que da saída"
